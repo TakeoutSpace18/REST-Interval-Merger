@@ -1,11 +1,12 @@
 package com.github.takeoutspace18.RestIntervalMerger.service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
 
 public class IntervalMerger {
     public static <T extends Comparable<T>> List<List<T>> merge(List<List<T>> intervals) {
-        intervals.sort((o1, o2) -> o1.get(0).compareTo(o2.get(0)));
+        intervals.sort(Comparator.comparing(o -> o.get(0)));
         Stack<List<T>> mergedIntervals = new Stack<>();
         mergedIntervals.push(intervals.get(0));
 
