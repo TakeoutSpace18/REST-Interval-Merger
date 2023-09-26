@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class IntervalsServiceImpl implements IntervalsService {
@@ -36,14 +37,14 @@ public class IntervalsServiceImpl implements IntervalsService {
     }
 
     @Override
-    public List<String> getMinLetterInterval() {
-        LetterIntervals entity = letterIntervalsRepository.findMinInterval().get();
-        return List.of(entity.getInterval_start(), entity.getInterval_stop());
+    public Optional<List<String>> getMinLetterInterval() {
+        Optional<LetterIntervals> foundEntity = letterIntervalsRepository.findMinInterval();
+        return foundEntity.map(entity -> List.of(entity.getInterval_start(), entity.getInterval_stop()));
     }
 
     @Override
-    public List<Integer> getMinDigitInterval() {
-        DigitIntervals entity = digitIntervalsRepository.findMinInterval().get();
-        return List.of(entity.getInterval_start(), entity.getInterval_stop());
+    public Optional<List<Integer>> getMinDigitInterval() {
+        Optional<DigitIntervals> foundEntity = digitIntervalsRepository.findMinInterval();
+        return foundEntity.map(entity -> List.of(entity.getInterval_start(), entity.getInterval_stop()));
     }
 }

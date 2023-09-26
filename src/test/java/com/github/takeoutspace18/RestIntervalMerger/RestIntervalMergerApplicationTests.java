@@ -51,6 +51,11 @@ class RestIntervalMergerApplicationTests {
 		checkGetMinInterval(kind, "[33, 40]");
 	}
 
+	@Test
+	public void notFoundIsReturned() throws Exception {
+		this.mockMvc.perform(get("/api/nv1/intervals/min?kind=digits")).andExpect(status().isNotFound());
+	}
+
 	private void postMergeMockIntervals(String kind, String mockJsonIntervals) throws Exception {
 		this.mockMvc.perform(post("/api/v1/intervals/merge?kind={kind}", kind).contentType(MediaType.APPLICATION_JSON).content(mockJsonIntervals))
 				.andDo(print()).andExpect(status().isOk());

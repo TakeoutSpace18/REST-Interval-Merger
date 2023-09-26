@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -17,8 +18,9 @@ public class IntervalsController {
     @Autowired
     private IntervalsService intervalsService;
 
+    @SuppressWarnings("unchecked")
     @PostMapping(value = "merge")
-    public <T> ResponseEntity<Void> merge(@RequestParam IntervalKind kind, @RequestBody Object intervals) {
+    public ResponseEntity<Void> merge(@RequestParam IntervalKind kind, @RequestBody Object intervals) {
         switch (kind) {
             case digits -> {
                 intervalsService.mergeDigitIntervals((List<List<Integer>>)intervals);
@@ -26,21 +28,27 @@ public class IntervalsController {
             case letters -> {
                 intervalsService.mergeLetterIntervals((List<List<String>>)intervals);
             }
+            default -> throw new IllegalStateException("Unexpected value: " + kind);
         }
 
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "min")
-    public List<? extends Serializable> min(@RequestParam IntervalKind kind) {
+    public ResponseEntity<?> min(@RequestParam IntervalKind kind) {
+        Optional<?> foundInterval;
         switch (kind) {
             case digits -> {
-                return intervalsService.getMinDigitInterval();
+                foundInterval = intervalsService.getMinDigitInterval();
             }
             case letters -> {
-                return intervalsService.getMinLetterInterval();
+                foundInterval = intervalsService.getMinLetterInterval();
             }
+            default -> throw new IllegalStateException("Unexpected value: " + kind);
         }
-        return null;
+        if (foundInterval.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(foundInterval.get());
     }
 }
