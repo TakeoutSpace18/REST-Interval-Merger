@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "d31f99d6-6e71-4fb6-a8fe-622da7ec8639",
+		"name": "REST-Interval-Merger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28290911"
+	},
+	"item": [
+		{
+			"name": "Merge digits",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    [1, 4],\n    [2, 6],\n    [8, 10],\n    [10, 11]\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/intervals/merge?kind=digits",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"intervals",
+						"merge"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "digits"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Merge letters",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    [\"a\", \"c\"],\n    [\"b\", \"d\"],\n    [\"e\", \"g\"],\n    [\"h\", \"i\"]\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/intervals/merge?kind=letters",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"intervals",
+						"merge"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "letters"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get min digits",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/intervals/min?kind=digits",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"intervals",
+						"min"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "digits"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get min letters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/intervals/min?kind=letters",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"intervals",
+						"min"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "letters"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
