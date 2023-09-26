@@ -15,15 +15,15 @@ public class Intervals<T extends Comparable<T>> implements Serializable {
     @Column(updatable = false,
     nullable = false,
     unique = true)
-    private Integer interval_id;
+    private Integer id;
 
     @Column
-    private T interval_start;
+    private T start;
     @Column
-    private T interval_stop;
+    private T stop;
 
     public Intervals(T start, T stop) {
-        this.interval_start = start;
-        this.interval_stop = stop;
+        this.start = start;
+        this.stop = stop;
     }
 }

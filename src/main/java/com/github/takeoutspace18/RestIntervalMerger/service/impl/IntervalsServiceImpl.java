@@ -39,12 +39,12 @@ public class IntervalsServiceImpl implements IntervalsService {
     @Override
     public Optional<List<String>> getMinLetterInterval() {
         Optional<LetterIntervals> foundEntity = letterIntervalsRepository.findMinInterval();
-        return foundEntity.map(entity -> List.of(entity.getInterval_start(), entity.getInterval_stop()));
+        return foundEntity.map(entity -> List.of(entity.getStart(), entity.getStop()));
     }
 
     @Override
     public Optional<List<Integer>> getMinDigitInterval() {
         Optional<DigitIntervals> foundEntity = digitIntervalsRepository.findMinInterval();
-        return foundEntity.map(entity -> List.of(entity.getInterval_start(), entity.getInterval_stop()));
+        return foundEntity.map(entity -> List.of(entity.getStart(), entity.getStop()));
     }
 }
